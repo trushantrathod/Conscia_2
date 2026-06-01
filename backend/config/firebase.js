@@ -1,17 +1,34 @@
-import admin from 'firebase-admin'; // <-- THE FIX: Import the official Google package
-import dotenv from 'dotenv';
-import { createRequire } from 'module';
+import admin from 'firebase-admin';
+import { google } from 'googleapis'; // If you're using googleapis anywhere else, otherwise admin is fine
 
-dotenv.config();
+let serviceAccount;
 
-// Require the local JSON file securely
-const require = createRequire(import.meta.url);
-const serviceAccount = require('../serviceAccountKey.json');
+// THE PRODUCTION FIX: Look for the environment variable first!
+if (process.env.FIREBASE_SERVICE_ACCOUNT) {
+  try {
+    // Parse the environment variable string back into a clean JSON object
+    serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+  } catch (error) {
+    console.error("❌ Failed to parse FIREBASE_SERVICE_ACCOUNT env variable:", error);
+  }
+} else {
+  // Local Development Fallback: look for the physical file only when working on your machine
+  try {
+    serviceAccount = await import('../serviceAccountKey.json', { assert: { type: 'json' } });
+    serviceAccount = serviceAccount.default;
+  } catch (error) {
+    console.warn("⚠️ Local serviceAccountKey.json not found. Make sure environment variables are set.");
+  }
+}
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+if (!admin.apps.length && serviceAccount) {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+  });
+  console.log("🔥 Firebase Admin SDK initialized successfully");
+} else if (!serviceAccount) {
+  console.error("❌ Firebase could not be initialized: Missing credentials.");
+}
 
-// Export the Firestore database instance
 export const db = admin.firestore();
-export { admin };
+export const auth = admin.auth();
