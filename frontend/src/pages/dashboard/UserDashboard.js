@@ -157,7 +157,6 @@ const UserDashboard = () => {
         return [...prev, ...newProducts];
       });
       
-      setLastVisible(data.lastVisible);
       lastVisibleRef.current = data.lastVisible;
       setHasMore(data.hasMore);
     } catch (error) {
@@ -173,7 +172,6 @@ const UserDashboard = () => {
     setSearchTerm('');
     setIsSearching(false);
     setProducts([]);
-    setLastVisible(null);
     lastVisibleRef.current = null;
     setHasMore(true);
     setLoadTrigger(0);
