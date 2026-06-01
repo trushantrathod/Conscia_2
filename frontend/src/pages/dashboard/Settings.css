@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+.settings-container {
+  position: relative;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 2.5rem 5% 6rem;
+  color: #e8edf5;
+  font-family: 'DM Sans', sans-serif;
+  animation: fadeSlideDown 0.7s cubic-bezier(0.4, 0, 0.2, 1) both;
+  z-index: 10;
+}
+
+.settings-header {
+  margin-bottom: 2.75rem;
+  padding-bottom: 2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.settings-header-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(110,231,247,0.12), rgba(167,139,250,0.12));
+  border: 1px solid rgba(110,231,247,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.35rem; color: #6ee7f7;
+  flex-shrink: 0;
+  box-shadow: 0 0 20px rgba(110,231,247,0.1);
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.settings-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+  font-weight: 800;
+  margin: 0 0 0.45rem 0;
+}
+
+.settings-subtitle {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* --- THE GLASS SETTINGS CARD --- */
+.settings-card {
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s;
+  animation: cardReveal 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) calc(var(--card-i, 0) * 0.12s) both;
+}
+
+.settings-card:hover, .settings-card:focus-within {
+  border-color: rgba(110, 231, 247, 0.3);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4), 0 0 20px rgba(110, 231, 247, 0.1);
+}
+
+.settings-card-header h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #f8fafc;
+  margin: 0 0 1.5rem 0;
+}
+
+/* --- FORM CONTROLS --- */
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.settings-form label {
+  font-size: 0.85rem;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.input-wrapper { position: relative; }
+
+.settings-form input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  color: #f8fafc;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.settings-form input::placeholder { color: rgba(148, 163, 184, 0.5); }
+
+.settings-form input:focus {
+  border-color: rgba(110, 231, 247, 0.5);
+  background: rgba(15, 23, 42, 0.6);
+  box-shadow: 0 0 15px rgba(110, 231, 247, 0.1);
+}
+
+/* The Animated Underline */
+.input-underline {
+  position: absolute;
+  bottom: 1px; left: 50%;
+  transform: translateX(-50%);
+  height: 2px; width: 0;
+  background: linear-gradient(90deg, #6ee7f7, #a78bfa);
+  transition: width 0.4s ease;
+  pointer-events: none;
+}
+.settings-form input:focus + .input-underline { width: 95%; }
+
+/* --- BUTTON --- */
+.settings-btn {
+  display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem; font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.settings-btn.btn-password {
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+}
+
+.settings-btn.btn-password:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.6);
+}
+
+.settings-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.btn-spinner {
+  width: 18px; height: 18px;
+  border: 2px solid #ffffff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* --- ANIMATED ALERTS --- */
+.settings-alert {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem; font-weight: 500;
+  animation: alertIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.settings-alert.success {
+  background: rgba(52,211,153,0.1);
+  color: #34d399;
+  border: 1px solid rgba(52,211,153,0.3);
+}
+
+.settings-alert.error {
+  background: rgba(248,113,113,0.1);
+  color: #f87171;
+  border: 1px solid rgba(248,113,113,0.3);
+}
+
+/* --- KEYFRAMES --- */
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes cardReveal {
+  from { opacity: 0; transform: translateY(28px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes alertIn {
+  from { opacity: 0; transform: translateX(-15px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 16px rgba(110,231,247,0.1); }
+  50%      { box-shadow: 0 0 28px rgba(110,231,247,0.25); }
+}

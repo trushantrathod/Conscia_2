@@ -1,0 +1,132 @@
+/* ═══════════════════════════════════════════
+   DASHBOARD LAYOUT - DEEP SPACE GLASS
+   ═══════════════════════════════════════════ */
+
+.dashboard-layout {
+  display: flex;
+  height: 100vh; /* 🚨 THE FIX: Locks the container to exactly the screen height */
+  width: 100vw;
+  background: var(--color-bg-animated-gradient, #06080f); 
+  background-size: 400% 400%;
+  animation: animatedGradient 20s ease infinite;
+  color: #f8fafc;
+  font-family: 'DM Sans', var(--font-sans), sans-serif;
+  overflow: hidden; /* 🚨 THE FIX: Prevents the whole page from scrolling */
+}
+
+/* --- SIDEBAR --- */
+.dashboard-sidebar {
+  width: 260px;
+  height: 100vh; 
+  box-sizing: border-box; /* 🚨 THE FIX: Keeps padding strictly inside the 100vh */
+  overflow-y: auto; /* 🚨 THE FIX: Allows the sidebar to scroll if your screen is short */
+  background: rgba(15, 23, 42, 0.4);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 1.5rem;
+  z-index: 50;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-brand {
+  margin-bottom: 3rem;
+  padding-left: 0.5rem;
+}
+
+.sidebar-brand h2 {
+  font-family: 'Syne', var(--font-display), sans-serif;
+  font-weight: 800;
+  font-size: 1.75rem;
+  margin: 0;
+  background: linear-gradient(90deg, #6ee7f7, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 2px;
+}
+
+/* --- NAVIGATION LINKS --- */
+.sidebar-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebar-bottom {
+  margin-top: auto; /* Now it perfectly pins to the bottom of the screen! */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 1.5rem;
+}
+
+.sidebar-link {
+  text-decoration: none;
+  color: #94a3b8;
+  padding: 0.85rem 1.25rem;
+  border-radius: 10px;
+  font-family: 'DM Sans', var(--font-sans), sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent;
+  border: 1px solid transparent;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sidebar-link:hover {
+  color: #f8fafc;
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+  transform: translateX(4px);
+}
+
+.sidebar-link.active {
+  color: #6ee7f7;
+  background: rgba(110, 231, 247, 0.08);
+  border-color: rgba(110, 231, 247, 0.2);
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(110, 231, 247, 0.1);
+}
+
+.logout-btn {
+  color: #f87171;
+}
+
+.logout-btn:hover {
+  color: #fca5a5;
+  background: rgba(248, 113, 113, 0.08);
+  border-color: rgba(248, 113, 113, 0.2);
+  box-shadow: 0 4px 15px rgba(248, 113, 113, 0.1);
+}
+
+/* --- MAIN CONTENT AREA --- */
+.dashboard-main-content {
+  flex: 1;
+  overflow-y: auto; /* 🚨 THE FIX: Only this specific box is allowed to scroll now */
+  position: relative;
+  height: 100vh;
+}
+
+/* Scrollbar styling for webkit */
+.dashboard-main-content::-webkit-scrollbar {
+  width: 8px;
+}
+.dashboard-main-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.dashboard-main-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+.dashboard-main-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
