@@ -8,10 +8,10 @@ const UserDashboard = () => {
   const [category, setCategory] = useState('Beauty'); 
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearching, setIsSearching] = useState(false); 
-  const [viewMode, setViewMode] = useState('grid');
+  const [viewMode] = useState('grid');
   
   // --- Pagination State ---
-  const [lastVisible, setLastVisible] = useState(null); 
+  const [lastVisible] = useState(null); 
   const lastVisibleRef = useRef(null); 
   const [hasMore, setHasMore] = useState(true);
   const [loadingInitial, setLoadingInitial] = useState(true);
