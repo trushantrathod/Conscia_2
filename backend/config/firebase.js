@@ -29,5 +29,6 @@ if (!admin.apps.length && serviceAccount) {
   console.error("❌ Firebase could not be initialized: Missing credentials.");
 }
 
+export { admin }; 
 export const db = admin.firestore();
 export const auth = admin.auth();
