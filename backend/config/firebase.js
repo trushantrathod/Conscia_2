@@ -1,5 +1,4 @@
 import admin from 'firebase-admin';
-import { google } from 'googleapis'; // If you're using googleapis anywhere else, otherwise admin is fine
 
 let serviceAccount;
 
