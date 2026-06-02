@@ -4,14 +4,14 @@
 
 .dashboard-layout {
   display: flex;
-  height: 100vh; /* 🚨 THE FIX: Locks the container to exactly the screen height */
-  width: 100vw;
-  background: var(--color-bg-animated-gradient, #06080f); 
+  height: 100vh;
+  width: 100%;
+  background: var(--color-bg-animated-gradient, #06080f);
   background-size: 400% 400%;
   animation: animatedGradient 20s ease infinite;
   color: #f8fafc;
   font-family: 'DM Sans', var(--font-sans), sans-serif;
-  overflow: hidden; /* 🚨 THE FIX: Prevents the whole page from scrolling */
+  overflow: hidden;
 }
 
 /* --- SIDEBAR --- */
@@ -129,4 +129,107 @@
 }
 .dashboard-main-content::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
+}
+
+/* ==========================================
+   MOBILE SIDEBAR
+========================================== */
+
+.mobile-menu-btn {
+  display: none;
+}
+
+@media (max-width: 768px) {
+
+  html,
+  body,
+  #root {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .dashboard-layout {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: fixed;
+    top: 15px;
+    left: 15px;
+
+    width: 44px;
+    height: 44px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    color: #ffffff;
+    font-size: 1.4rem;
+    font-weight: bold;
+    cursor: pointer;
+
+    z-index: 1100;
+  }
+
+  .dashboard-sidebar {
+    position: fixed;
+
+    top: 0;
+    left: -280px;
+
+    width: 260px;
+    height: 100vh;
+
+    padding: 2rem 1.5rem;
+
+    background: rgba(15, 23, 42, 0.98);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border-right: 1px solid rgba(255,255,255,0.08);
+
+    transition: left 0.3s ease;
+
+    z-index: 1050;
+
+    overflow-y: auto;
+  }
+
+  .dashboard-sidebar.open {
+    left: 0;
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.6);
+
+    z-index: 1040;
+  }
+
+  .dashboard-main-content {
+    width: 100%;
+    min-width: 0;
+    margin-left: 0;
+    overflow-x: hidden;
+  }
+
+  .sidebar-brand {
+    margin-top: 3rem;
+  }
+
+  .sidebar-link {
+    width: 100%;
+  }
 }
