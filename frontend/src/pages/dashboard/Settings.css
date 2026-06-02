@@ -201,3 +201,84 @@
   0%, 100% { box-shadow: 0 0 16px rgba(110,231,247,0.1); }
   50%      { box-shadow: 0 0 28px rgba(110,231,247,0.25); }
 }
+
+/* =====================================
+   SETTINGS RESPONSIVE FIXES
+===================================== */
+
+@media (max-width: 768px) {
+
+  .settings-container {
+    padding: 1.5rem 1rem 4rem;
+  }
+
+  .settings-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .settings-header-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 1.1rem;
+  }
+
+  .settings-title {
+    font-size: 1.6rem;
+  }
+
+  .settings-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .settings-card {
+    padding: 1.5rem;
+  }
+
+  .settings-card-header h2 {
+    font-size: 1.15rem;
+  }
+
+  .settings-form input {
+    font-size: 16px;
+  }
+
+  .settings-btn {
+    min-height: 52px;
+  }
+
+  .settings-alert {
+    font-size: 0.85rem;
+    padding: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .settings-container {
+    padding: 1rem;
+  }
+
+  .settings-card {
+    padding: 1rem;
+    border-radius: 14px;
+  }
+
+  .settings-title {
+    font-size: 1.3rem;
+  }
+
+  .settings-card-header h2 {
+    font-size: 1rem;
+  }
+
+  .settings-form label {
+    font-size: 0.8rem;
+  }
+
+  .settings-form input {
+    padding: 0.8rem;
+  }
+}

@@ -65,6 +65,11 @@ const UserDashboard = () => {
       }
     };
     document.addEventListener('mousemove', handleMouseMove);
+    const isMobile = window.innerWidth <= 768;
+
+    if (!isMobile) {
+      document.addEventListener('mousemove', handleMouseMove);
+    }
 
     // Particle System
     const canvas = bgCanvasRef.current;

@@ -22,6 +22,14 @@ const Settings = () => {
     };
     document.addEventListener('mousemove', handleMouseMove);
 
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+      return () => {
+        document.removeEventListener('mousemove', handleMouseMove);
+      };
+    }
+
     const canvas = bgCanvasRef.current;
     if (canvas) {
       const ctx = canvas.getContext('2d');

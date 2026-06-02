@@ -1,5 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
 
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+img,
+svg,
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
 #landing-app {
   position: relative;
   min-height: 100vh;
@@ -346,3 +359,109 @@
 }
 
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* =====================================
+   AUTH PAGE RESPONSIVE FIXES
+===================================== */
+
+@media (max-width: 768px) {
+
+  .landing-nav {
+    padding: 1rem;
+  }
+
+  .nav-brand {
+    font-size: 1.2rem;
+  }
+
+  .nav-login-btn {
+    padding: 0.55rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .landing-main {
+    padding: 1rem;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+    line-height: 1.15;
+  }
+
+  .hero-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .hero-badge {
+    font-size: 0.7rem;
+  }
+
+  .hero-actions {
+    width: 100%;
+  }
+
+  .btn-primary-large,
+  .btn-secondary-large {
+    width: 100%;
+    min-height: 52px;
+  }
+
+  .auth-section {
+    max-width: 100%;
+  }
+
+  .auth-card {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+
+  .auth-header h2 {
+    font-size: 1.6rem;
+  }
+
+  .auth-header p {
+    font-size: 0.85rem;
+  }
+
+  .form-group input {
+    font-size: 16px;
+  }
+
+  .auth-submit-btn {
+    min-height: 52px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .hero-title {
+    font-size: 1.8rem;
+  }
+
+  .hero-description {
+    font-size: 0.85rem;
+  }
+
+  .hero-badge {
+    font-size: 0.65rem;
+    padding: 0.35rem 0.8rem;
+  }
+
+  .auth-card {
+    padding: 1rem;
+  }
+
+  .auth-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .auth-toggle {
+    font-size: 0.8rem;
+  }
+
+  .btn-primary-large,
+  .btn-secondary-large {
+    font-size: 0.95rem;
+  }
+}
