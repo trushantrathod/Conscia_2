@@ -160,35 +160,67 @@ export const getMyReviews = asyncHandler(async (req, res) => {
 
 export const getEthicalSnapshot = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const productRef = db.collection('products').doc(id);
-  const doc = await productRef.get();
-
-  if (!doc.exists) {
-    return res.status(404).json({ message: "Product not found" });
-  }
-
-  const product = doc.data();
-  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-  const model = genAI.getGenerativeModel({ model: 'gemini-flash-latest' });
-
-  const prompt = `
-    You are an ethical shopping assistant for a platform called Conscia. 
-    Evaluate the following product:
-    Name: ${product.product_name}
-    Category: ${product.category}
-    Public Sentiment Score: ${product.public_sentiment_score}/100
-
-    Provide an "Ethical Snapshot" suggesting whether a conscious consumer should buy this or not.
-    CRITICAL RULES:
-    - Your response MUST be exactly 3 to 4 sentences long.
-    - Be direct, balanced, and focus on general ethical/environmental impact for this type of product.
-    - Do not use markdown formatting (like asterisks or bold text).
-  `;
 
   try {
+    const productRef = db.collection('products').doc(id);
+    const doc = await productRef.get();
+
+    if (!doc.exists) {
+      return res.status(404).json({
+        message: "Product not found"
+      });
+    }
+
+    const product = doc.data();
+
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
+    const model = genAI.getGenerativeModel({
+      model: 'gemini-2.5-flash'
+    });
+
+    const prompt = `
+You are an ethical shopping assistant for a platform called Conscia.
+
+Evaluate the following product:
+
+Name: ${product.product_name}
+Category: ${product.category}
+Public Sentiment Score: ${product.public_sentiment_score}/100
+
+Provide an "Ethical Snapshot" suggesting whether a conscious consumer should buy this or not.
+
+CRITICAL RULES:
+- Your response MUST be exactly 3 to 4 sentences long.
+- Be direct, balanced, and easy to understand.
+- Focus on general ethical and environmental considerations relevant to this type of product.
+- Do not use markdown formatting.
+- Do not use bullet points.
+- Do not invent specific certifications, materials, labor practices, or company claims that are not provided.
+`;
+
     const result = await model.generateContent(prompt);
-    res.status(200).json({ snapshot: result.response.text() });
+
+    const snapshot = result.response.text()?.trim();
+
+    if (!snapshot) {
+      throw new Error("Gemini returned an empty snapshot.");
+    }
+
+    return res.status(200).json({
+      snapshot
+    });
+
   } catch (error) {
-    res.status(503).json({ message: "AI Analysis currently unavailable." });
+    console.error("❌ GEMINI SNAPSHOT ERROR:", {
+      message: error.message,
+      status: error.status,
+      statusText: error.statusText
+    });
+
+    // Keep this user-friendly message.
+    return res.status(503).json({
+      message: "AI Analysis currently unavailable."
+    });
   }
 });

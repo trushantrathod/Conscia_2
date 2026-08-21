@@ -9,6 +9,7 @@ import rateLimit from 'express-rate-limit';
 import authRoutes from './routes/authRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import { processChatMessage } from './controllers/chatController.js';
+import { protect } from './middleware/authMiddleware.js';
 
 dotenv.config();
 
@@ -67,7 +68,7 @@ app.get('/api/health', (req, res) => {
 });
 
 // The Conscia Chatbot Route
-app.post('/api/chat', processChatMessage);
+app.post('/api/chat', protect, processChatMessage);
 
 // ==========================================
 // Global Error Handler

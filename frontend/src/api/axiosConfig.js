@@ -3,7 +3,7 @@ import { auth } from '../config/firebase';
 
 const apiClient = axios.create({
   // This tells React: "If we are live, use the live URL. If we are testing, use localhost."
-  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:8080/api',
+  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000/api',
   withCredentials: true,
 });
 
